@@ -16,7 +16,6 @@
       - [Duplicated Values](https://github.com/buddymar/NBA-MVP-Predictions/blob/main/README.md#duplicated-values)
 	- [Data Transformation](https://github.com/buddymar/NBA-MVP-Predictions/blob/main/README.md#correcting-errors--inconsistencies)
       - [Feature Engineering](https://github.com/buddymar/NBA-MVP-Predictions/blob/main/README.md#correcting-errors--inconsistencies)
-      - [Feature Selection](https://github.com/buddymar/NBA-MVP-Predictions/blob/main/README.md#creating-new-columns)
 - [Exploratory Data Analysis](https://github.com/buddymar/NBA-MVP-Predictions/blob/main/README.md#-exploratory-data-analysis)
   - [Feature Target](https://github.com/buddymar/NBA-MVP-Predictions/blob/main/README.md#player-attributes)
       - [Laptop Price]()
@@ -53,33 +52,31 @@
     <kbd> <img width="1000" alt="mvp banner" src="https://raw.githubusercontent.com/buddymar/Laptop-Price-Prediction/main/laptop_banner.jpg"> </kbd> <br>
 </p>
 
-In the exhilarating world of professional basketball, the race for the NBA Most Valuable Player (MVP) award stands as a pinnacle of individual excellence and team leadership. Every season, NBA fans eagerly anticipate the unveiling of the MVP, an accolade bestowed upon the player deemed most instrumental to their team's success and exhibiting exceptional performance on the court.
+Laptop telah menjadi kebutuhan primer di kalangan umum, didorong oleh perkembangan digital yang cepat dan dinamis. Saat membeli laptop, banyak komponen dan fitur yang memengaruhi harga totalnya, termasuk CPU, GPU, dan lainnya. Oleh karena itu, penting untuk memahami dampak setiap komponen ini pada harga laptop. Dengan informasi ini, kita dapat mengetahui komponen yang paling berpengaruh pada harga laptop, mengestimasi harga komponen tertentu, dan bahkan memperkirakan harga total laptop berdasarkan spesifikasinya.
 
-The MVP selection process entails a comprehensive evaluation by a panel of sportswriters and broadcasters, who cast their votes based on a multitude of factors, including individual player statistics, team performance, impact on game outcomes, and intangible qualities such as leadership and sportsmanship. With the MVP race often culminating in heated debates and impassioned discussions among basketball enthusiasts, unraveling the underlying metrics that sway voters' decisions has become a compelling endeavor.
-
-In this report, we undertake an in-depth exploration of the NBA MVP selection process. Utilizing a meticulously curated dataset obtained through web scraping, we delve into the intricate interplay of player attributes, fundamental and advanced statistical metrics, and team dynamics. Our objective is to unravel the complexities surrounding MVP success by scrutinizing the statistical profiles of past MVP recipients and dissecting the subtle intricacies of team performance. Through rigorous analysis, we endeavor to discern the pivotal factors that sway voters' decisions and forecast the leading contenders for the prestigious MVP accolade.
+Notebook ini bertujuan untuk menganalisis dan memodelkan faktor-faktor yang memengaruhi harga laptop di pasaran. Analisis ini akan mengidentifikasi fitur yang paling signifikan dalam menentukan harga laptop, serta membangun model untuk memprediksi harga berdasarkan fitur-fitur yang ada dalam dataset.
 
 <br>
 
-## 📌 **Data Scraping**
+## 📌 **Data Source**
 
-<p align="center">
-    <kbd> <img width="1000" alt="bref" src="https://raw.githubusercontent.com/buddymar/NBA-MVP-Predictions/main/assets/BRef.jpg"> </kbd> <br>
-</p>
+Berikut ini feature dan deskripsi dari dataset yang digunakan pada analisis ini.
 
-The data utilized in this analysis and predictive modeling will be sourced from a website that hosts various basketball databases, [basketball-reference.com](https://www.basketball-reference.com/). The following data will be scraped, including:
-- **MVP voting results:** Distribution of votes among players who received at least one vote each season.
-- **Players basic stats:** All stats typically recorded in the official box score, aggregated per game for counting stats and per year for percentage stats.
-- **Players advanced stats:** Analytical stats formulated and calculated using basic stats.
-- **Team stats:** Stats concerning team performance and record for each season.
-
-All this data is scraped for the period from 2001 to present.
-
-<br>
-
-## 📌 **Data Integration**
-
-In this section, all datasets will be merged into a single dataset for analysis and prediction. Before proceeding, we will conduct feature selection to eliminate columns that are unnecessary, redundant, or contain similar information to columns that will be used in the analysis.
+Table 1 — Feature Engineering
+ **Feature** | **Explanation** |
+-----------------|--------------|
+Company | Perusahaan produsen laptop
+Product | Brand dan model
+TypeName | Tipe laptop (notebook, gaming, dll.) 
+Inches | Ukuran layar
+ScreenResolution | Resolusi layar
+Cpu | Central Processing Unit (CPU)
+Ram | Ukuran RAM laptop 
+Memory | Ukuran & tipe memori laptop (HDD, SSD, dll.) 
+GPU | Graphics Processing Units (GPU)
+OpSys | Sistem operasi
+Weight | Berat laptop
+Price_euros | Harga laptop (€)
 
 <br>
 
@@ -89,50 +86,29 @@ The data cleaning section will involve various processes such as correcting erro
 
 <br>
 
-### Data Type
-
-All columns in this table are currently of string data type. Columns such as `Year`, `Age`, `G`, and other basketball stats should be converted to numeric format.
-
-<br>
-
 ### Missing Values
 
-We have identified three categories for the columns with missing values:
-- `Vote_Share`: All missing values in this feature indicate that the players did not receive any MVP votes.
-- **Team Stats**: Columns related to team stats have consistent missing values across them, indicating a common factor for these missing values.
-- **Player Stats**: Several columns related to player stats, particularly shooting percentages, contain missing values.
+Jumlah baris dengan missing data pada dataset: 0
 
 <br>
 
 ### Duplicated Values
 
-The dataset contains 0 duplicated records.
+Jumlah baris dengan data duplikat pada dataset: 0
 
 <br>
 
-### Correcting Errors & Inconsistencies
+### Feature Engineering
 
-In the dataset, there are 17 unique values for `Position` column. In basketball, especially the NBA, there are five primary positions used: PG, SG, SF, PF, and C. Therefore, there may be potential errors or inconsistencies here. 
+Pada bagian ini, akan dilakukan *feature engineering* terhadap beberapa fitur untuk mendapatkan dan menambah fitur-fitur laptop yang ada pada dataset ini.
 
-There are quite a lot of players recorded as having multiple positions. In reality, there should be many more players recorded as having multiple positions, especially in this *position-less* era in the NBA. However, to make our data and analysis more consistent, we will use the first position recorded in the dataset.
-
-<br>
-
-### Creating New Columns
-
-These are another set of columns or features created to assist in analyzing and predicting an MVP in the NBA.
-
-Table 1 — Feature Engineering
- **New Feature** | **Explanation** |
+Table 2 — Feature Engineering
+ **Feature** | **New Engineered Feature** |
 -----------------|--------------|
-MVP_rank | MVP ranking of each player for each year  
-Overall_Standings | Overall standing of a team in each year
-Conf_Standings | Conference standing of a team in each year
-Stats_zscore | New features by transforming and standardizing all statistics within each year
-prior_mvp_winner | Have you won an MVP before?
-last_season_mvp | Did you win the MVP last year?
-last_two_season_mvp | Did you win the last two MVPs?
-total_mvp_currently | How many MVPs have you won before the current season?
+Screen Resolution | Resolution, IPS, Touchscreen
+CPU | Cpu_GHz, Cpu_brand
+Memory | Memory_1, SSD_1 (GB), HDD_1 (GB), Hybrid_1 (GB), Flash_1 (GB), Memory_2, Memory_2 (GB), Total_Memory (GB) 
+GPU | Gpu_brand
 
 <br>
 
