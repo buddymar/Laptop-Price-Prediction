@@ -37,7 +37,6 @@
       - [Resolution 2560x1440]()
   - [Features Correlations](https://github.com/buddymar/NBA-MVP-Predictions/blob/main/README.md#team-stats)
 - [Predictive Modeling](https://github.com/buddymar/NBA-MVP-Predictions/blob/main/README.md#-predictive-modeling)
-  - [Preprocessing](https://github.com/buddymar/NBA-MVP-Predictions/blob/main/README.md#modeling)
   - [Modeling](https://github.com/buddymar/NBA-MVP-Predictions/blob/main/README.md#modeling)
   - [Model Interpretation](https://github.com/buddymar/NBA-MVP-Predictions/blob/main/README.md#model-interpretation)
 <br>
@@ -339,71 +338,49 @@ Fitur yang digunakan oleh laptop ini adalah fitur dengan rataan harga yang relat
 
 ## 📌 **Predictive Modeling**
 
-To predict the NBA MVP from this dataset, three models will be compared: Random Forest, XGBoost, and Extra Trees Regressor. The best-performing model will then be used for predicting and tracking the current season's NBA MVP. Given the imbalanced nature of the target variable, which often includes many zero values, the Root Mean Squared Logarithmic Error (RMSLE) will be used as the scoring metric.
+Untuk memprediksi harga laptop pada pemodelan ini, tiga model akan dibandingkan yaitu: Linear Regression (Ridge), Extra Tree Regressor, and Gradient Boosting Regressor. Model dengan skoring terbaik akan digunakan sebagai model akhir dari analisis ini.
 
 <br>
 
 ### Modeling
 
-Table 2 — Model Scoring
- **Model** | **RMSLE** | **R-squared** | **Best Hyperparameters** |
+Table 3 — Model Scoring
+ **Model** | **RMSE** | **R-squared** | **Best Hyperparameters** |
 -----------------|--------------|--------------|--------------|
-RandomForestRegressor | 0.2333 | 0.9063 | 'max_depth': 8, 'max_features': 'auto', 'min_samples_leaf': 3, 'min_samples_split': 6, 'n_estimators': 100
-ExtraTreesRegressor | 0.2408 | 0.9087 | 'max_depth': 7, 'max_features': 'auto', 'min_samples_leaf': 3, 'min_samples_split': 6, 'n_estimators': 100
-XGBRegressor | 0.155 | 0.9705 | 'colsample_bytree': 1.0, 'gamma': 0.1, 'learning_rate': 0.05, 'max_depth': 6, 'min_child_weight': 3, 'n_estimators': 63, 'reg_alpha': 0.5, 'reg_lambda': 1.0, 'subsample': 0.9
-<br>
-
-### Model Prediction
-
-<p align="center">
-    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/NBA-MVP-Predictions/main/assets/model%20prediction.png"> </kbd> <br>
-</p>
-
-**Key Points:**
-- Based on the NBA MVP predictions for 2001-2023 winners, the XGBoost model had the best performance, achieving the highest accuracy with 22 correct predictions out of 23 winners. The Extra Trees model made 19 correct predictions, while the Random Forest model made 18 correct predictions.
-- Interestingly, all three models incorrectly predicted the MVP for the 2017 season, selecting James Harden instead of Russell Westbrook.
-- Moreover, all three models predict Nikola Jokić as the MVP for the current 2024 season (as of March), with a high predicted vote share.
-- Overall, the models demonstrated high accuracy in predicting the NBA MVP, with XGBoost leading the pack with an accuracy ratio of 22 out of 23 (95.65%).
+Ridge | 280 € | 82.07% | 'reg__alpha': 300
+ExtraTreesRegressor | 267 € | 83.64% | 'max_depth': 40, 'min_samples_split': 3
+GradientBoostingRegressor | 225 € | 88.43% | 'min_samples_leaf': 2, 'min_samples_split': 15
 
 <br>
 
 <p align="center">
-    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/NBA-MVP-Predictions/main/assets/top3%20mvp.png"> </kbd> <br>
+    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/Laptop-Price-Prediction/main/assets/1_allmodel.png"> </kbd> <br>
 </p>
 
-**Key Points (as of March 2024):**
-- Nikola Jokić, with the highest PER, WS, and BPM, likely contributes significantly to the model predicting him as the number one of the top 10 MVP frontrunners.
-- Shai Gilgeous-Alexander (2nd) and Giannis Antetokounmpo (3rd) still have a chance to move up in the MVP ranking ladder based on their actual basic stats, advanced stats, team standings, and vote share prediction.
-- Luka Dončić leads in PTS per game (34.1) this season, with a considerable gap to the second highest, Shai Gilgeous-Alexander (30.9). This contributes to Dončić being in 4th place currently, despite his team's poor standings.
+Dari ketiga pemodelan yang dilakukan untuk memprediksi harga laptop, model `Gradient Boosting` memiliki score RMSLE, RMSE, dan R2 yang terbaik dibandingkan model lainnya. 
 
 <br>
 
 ### Model Interpretation
 
 <p align="center">
-    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/NBA-MVP-Predictions/main/assets/shap%20value.png"> </kbd> <br>
-</p>
-
-The feature with the highest impact on the XGBoost model prediction is `adj_W%`, which represents the team's winning percentage adjusted by the total basic stats of the player. The impact gap from this feature to the next feature is considerable. Following closely are the next two impactful features for the model: `Total_AdvStat`, representing the total advanced stats for the player, and adjusted `BPM`, which indicates the Box Plus/Minus of the player.
-
-<p align="center">
-    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/NBA-MVP-Predictions/main/assets/shap%20bee.png"> </kbd> <br>
-</p>
-
-From the beeswarm plot, we can discern in greater detail the influence of each feature in this model. The plot vividly illustrates the wide range of impact from the `adj_W` feature. Additionally, it's apparent that features with high-value records exert the most influence on the model's predictions. Conversely, most low-value records result in zero impact across all features, except for `AST`, `Age`, and `Year`.
-
-<br>
-
-## 📌 **Dashboard**
-
-Utilizing the same dataset analyzed earlier, this dashboard offers an additional perspective on NBA player performance and facilitates comparisons between player statistics. The dashboard consists of two sections: Leaderboard and Player Detailed Stats.
-
-In the Leaderboard section, users can view the top 10 leaders in various statistics for each year or team. Meanwhile, the Player Stats section provides detailed information on selected player statistics, including the actual values, percentiles against other players each year, and comparisons to other players.
-
-<p align="center">
-    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/NBA-MVP-Predictions/main/assets/dash1.png"> </kbd> <br>
+    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/Laptop-Price-Prediction/main/assets/2_shap.png"> </kbd> <br>
 </p>
 
 <p align="center">
-    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/NBA-MVP-Predictions/main/assets/dash2.png"> </kbd> <br>
+    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/Laptop-Price-Prediction/main/assets/2_beeshap.png"> </kbd> <br>
 </p>
+
+Dari lima fitur yang paling berpengaruh, dapat dilihat bahwa semakin besar `RAM`, `besar SSD`, dan `kecepatan GPU` maka semakin besar juga tambahan harga pada laptop. Sementara itu, semakin kecil `berat laptop` maka harga cenderung semakin besar. Untuk tipe laptop, laptop dengan `tipe Notebook` diberikan pengurangan harga laptop dibandingkan dengan laptop tipe lainnya. 
+
+Sebagai contoh, berikut ini interpretasi model pada salah satu laptop di *test data*.
+
+<p align="center">
+    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/Laptop-Price-Prediction/main/assets/2_example.png"> </kbd> <br>
+</p>
+
+Pada model ini, semua laptop diberi harga awal sebesar 1111.604 €. Laptop diatas diprediksi oleh model memiliki harga sebesar 575.8 €, dimana harga aktual laptop tersebut adalah 689 €.
+
+Lima fitur yang paling berpengaruh dari semakin kecilnya harga laptop prediksi dibandingkan dengan harga awal model adalah besar `RAM`, `kecepatan CPU`, `besar memori SSD`, `tipe laptop Notebook`, dan `resolusi 1366x768` yang dimiliki. 
+
+Dapat dilihat bahwa fitur-fitur ini menjadi pinalti/pengurang harga pada laptop tersebut karena ukurannya yang kecil seperti `RAM` hanya 4 GB, `kecepatan CPU` 2 GHz, dan `ukuran SSD` hanya 128 GB. Selain ukuran fitur yang kecil, tipe fitur yang dimiliki laptop ini juga tipe yang dilabel sebagai pinalti harga seperti `tipe Notebook` dan `resolusi 1366x768`.
