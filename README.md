@@ -3,7 +3,7 @@
 
 **Platform**: Jupyter Notebook | [Notebook via nbviewer](https://nbviewer.org/github/buddymar/Laptop-Price-Prediction/blob/main/Laptop%20Price%20Prediction.ipynb) | [Notebook via Github](https://github.com/buddymar/Laptop-Price-Prediction/blob/main/Laptop%20Price%20Prediction.ipynb)<br>
 **Programming Language**: Python <br>
-**Libraries**: Pandas, NumPy, sklearn, Matplotlib, Seaborn, SHAP <br>
+**Libraries**: Pandas, NumPy, Matplotlib, Seaborn, sklearn, SHAP <br>
 **Source Data**: Kaggle <br>
 <br>
 
@@ -26,8 +26,6 @@
       - [RAM]()
       - [Operation System]()
       - [Screen Resolution]()
-      - [IPS Feature]()
-      - [Touchscreen Feature]()
       - [CPU Brand]()
       - [CPU Speed]()
       - [GPU Brand]()
@@ -114,73 +112,228 @@ GPU | Gpu_brand
 
 ## 📌 **Exploratory Data Analysis**
 
-The Exploratory Data Analysis (EDA) will focus on analyzing all available data and information related to winning the NBA MVP award. It will primarily be divided into:
-- Player Attributes
-- Player Basic Stats
-- Player Advanced Stats
-- Teams Performance
+### Laptop Price
+
+<p align="center">
+    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/Laptop-Price-Prediction/main/assets/a_target.png"> </kbd> <br>
+</p>
+
+Interquartil (IQR) distribusi harga laptop berada di angka sekitar 600-1500 €, dengan rata-rata harga laptop ada di angka 1124 €. Harga laptop termahal ada di angka 6099 €.
+
+Terdapat beberapa laptop yang harganya melebihi batas ekstrim atas grafik boxplot. Hal ini dapat menjadi perhatian saat analisis pada bagian selanjutnya akan adanya potensi outlier laptop mahal pada dataset ini.
 
 <br>
 
-### Player Attributes
+### Company
 
 <p align="center">
-    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/NBA-MVP-Predictions/main/assets/vote_share.png"> </kbd> <br>
-</p>
-
-<p align="center">
-    <kbd> <img width="1000" alt="pos" src="https://raw.githubusercontent.com/buddymar/NBA-MVP-Predictions/main/assets/position.png"> </kbd> <br>
+    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/Laptop-Price-Prediction/main/assets/b_company.png"> </kbd> <br>
 </p>
 
 **Key Points:**
-- MPV winners consistently receive high vote shares, often close to or exceeding 90%, indicating strong support from NBA voters for their MVP candidacy.
-- Despite the subjective nature of MVP voting, the consistently high vote shares for winners suggest a certain level of consensus among voters regarding the most deserving candidate. However, there may still be biases or factors influencing the voting process, such as media coverage, team success, or individual narratives.
-- While power forwards and point guards have historically dominated MVP awards from 2001 to 2023, the last three MVP winners have been centers. Centers are traditionally known for their defensive presence, rebounding, and rim protection, but recent MVP-winning centers also excel offensively, showcasing versatility in their skill sets.
+- Dari 19 brand laptop yang ada di dataset, **brand dengan distribusi terbanyak adalah Lenovo, Dell, dan HP**
+- Terdapat 11 brand laptop yang penjualannya minim, dibawah 10 unit laptop per company.
+- Empat brand laptop yang memiliki penjualan terbanyak memiliki rataan harga yang relatif sama di angka ~1000 €.
+- Dari brand-brand laptop dengan penjualan diatas 10 unit, **brand Acer memiliki rataan harga laptop paling murah.**
 
 <br>
 
-### Player Basic Stats
+### Laptop Type
 
 <p align="center">
-    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/NBA-MVP-Predictions/main/assets/basic%20stats.png"> </kbd> <br>
+    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/Laptop-Price-Prediction/main/assets/b_type.png"> </kbd> <br>
 </p>
 
 **Key Points:**
-- MVP winners exhibit superior performance across various statistical categories compared to both MVP vote-getters and all players.
-- **Statistical excellence, particularly in scoring, shooting efficiency, playmaking, and defensive contributions, appears to be a common trait among MVP winners.**
+
+- **Lebih dari setengah tipe laptop yang terjual adalah tipe Notebook (55.8%).** 
+- **Salah satu faktor banyaknya penjualan laptop tipe Notebook adalah rataan harganya yang lebih murah dibandingkan tipe laptop lain (kecuali Netbook).** Namun, tetap ada juga laptop high-end dengan harga yang mahal di tipe Notebook ini. Harga tertinggi berada di angka ~5000 €.
+- Tipe laptop dengan rataan harga termahal adalah laptop Workstation di angka ~2000 €.
+- **Tipe Netbook memiliki rataan dan rentang harga laptop termurah.** 75% dari tipe laptop ini berada di rentang harga ~175-745 €. Meskipun harganya yang murah dibandingkan tipe laptop lain, Netbook masih memiliki total penjualan yang minim.
 
 <br>
 
-### Player Advanced Stats
+### Display Size
 
 <p align="center">
-    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/NBA-MVP-Predictions/main/assets/adv%20stats.png"> </kbd> <br>
-</p>
-
-<p align="center">
-    <kbd> <img width="1000" alt="pos" src="https://raw.githubusercontent.com/buddymar/NBA-MVP-Predictions/main/assets/bpm.png"> </kbd> <br>
-</p>
-
+    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/Laptop-Price-Prediction/main/assets/b_display.png"> </kbd> <br>
+</p>     
+      
 **Key Points:**
-- Advanced/analytical statistics provide a more nuanced understanding of player performance, focusing on efficiency, usage, and impact on both ends of the court.
-- MVP winners consistently demonstrate superior performance across various advanced metrics compared to both MVP vote-getters and all players, emphasizing their overall impact and contribution to their teams' success.
-- It's undeniable that OBPM can provide more insight into a player's value than DBPM. A player can receive MVP votes solely based on their offensive performance, even if they have little defensive impact while on the court. However, it's worth noting that many MVP winners also have high DBPM, which sets them apart from other vote-getters.
+
+- **Ukuran layar laptop yang paling umum adalah 15.6"** (51.65% dari total laptop di dataset)
+- Ukuran layar terkecil (11.6") memiliki rataan dan rentang harga laptop termurah, sementara ukuran layar terbesar (17.3") memiliki rataan dan rentang harga termahal.
+- **Dari grafik boxplot dapat dilihat bahwa tidak ada korelasi yang signifikan terlihat dari ukuran layar terhadap harga laptop.**
 
 <br>
 
-### Team Stats
+### RAM
 
 <p align="center">
-    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/NBA-MVP-Predictions/main/assets/team%20stats.png"> </kbd> <br>
-</p>
-
-<p align="center">
-    <kbd> <img width="1000" alt="pos" src="https://raw.githubusercontent.com/buddymar/NBA-MVP-Predictions/main/assets/team%20win%20vs%20win%20share.png"> </kbd> <br>
-</p>
+    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/Laptop-Price-Prediction/main/assets/b_ram.png"> </kbd> <br>
+</p> 
 
 **Key Points:**
-- Teams with MVP-caliber players tend to outperform their counterparts in terms of offensive and defensive efficiency, margin of victory, win-loss records, and overall and conference standings.
-- Higher overall and conference standings among MVP-winning teams reflect their ability to elevate team performance and competitiveness, positioning them as key leaders in guiding their teams to success within their respective conferences and the league as a whole.
+
+- **Mayoritas laptop-laptop di dataset ini menggunakan RAM 4, 8, dan 16 GB**
+- **Terdapat korelasi positif yang terlihat antara kapasitas RAM dan harga laptop, dimana semakin besar kapasitas RAM yang digunakan maka semakin mahal harga laptop tersebut.**
+
+<br>
+
+### Operation System
+
+<p align="center">
+    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/Laptop-Price-Prediction/main/assets/b_opsys.png"> </kbd> <br>
+</p> 
+
+**Key Points:**
+
+- **Mayoritas laptop pada dataset menggunakan Windows 10 sebagai Operation System (82.27%).** Rataan harga berada di angka ~1000 €.
+- Untuk laptop yang menggunakan OpSys selain Windows 10, terdapat empat OpSys yang memiliki rataan harga lebih rendah yaitu Linux, Chrome OS, Android dan laptop tanpa OS.
+- Sementara itu, ada dua OpSys yang memiliki rataan harga lebih tinggi dibandingkan Windows 10 & 10S yaitu Windows 7 dan macOS.
+
+<br>
+
+### Screen Resolution
+
+<p align="center">
+    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/Laptop-Price-Prediction/main/assets/b_reso.png"> </kbd> <br>
+</p> 
+
+**Key Points:**
+- **Mayoritas resolusi layar yang digunakan pada laptop di dataset adalah 1920x1080 (66%) dan 1366x768 (24%)**
+- **Terlihat korelasi positif antara resolusi dan harga laptop**, dimana semakin besar resolusi layar maka rataan dari harga laptop cenderung lebih mahal. Namun, terdapat pengecualian pada resolusi 2560x1440 karena rataan harga resolusi ini justru lebih mahal dibandingkan resolusi 3200x1800.
+- Tiga laptop termahal sama-sama menggunakan resolusi tertinggi di dataset yaitu 3840x2160 (4K Ultra HD)
+
+<br>
+
+### CPU Brand
+
+<p align="center">
+    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/Laptop-Price-Prediction/main/assets/b_cpu.png"> </kbd> <br>
+</p> 
+
+**Key Points:**
+- **Komposisi persentase brand CPU pada dataset ini adalah Intel (95.16%), AMD (4.76%), Samsung (0.08%)**
+- Sub-brand yang paling banyak digunakan adalah Intel Core series, terutama untuk Intel Core dengan indikator U (mobile power efficient)
+- **Untuk Intel Core series, brand modifier i7 menjadi CPU Brand yang paling banyak digunakan**
+- Sub-brand Intel Celeron, Pentium dan Atom memiliki rataan harga yang relatif paling murah dibandingkan brand lain
+- **Untuk Intel Core series pada brand modifier yang sama, urutan indikator U-HQ-HK adalah urutan indikator dengan rataan harga laptop termurah sampai yang termahal**
+- **Pada brand AMD, sub-brand AMD Ryzen memiliki rataan harga yang lebih mahal dibandingkan AMD non-Ryzen**
+
+<br>
+
+### CPU Speed
+
+<p align="center">
+    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/Laptop-Price-Prediction/main/assets/b_cpughz.png"> </kbd> <br>
+</p> 
+
+**Key Points:**
+- **Kecepatan CPU yang paling sering digunakan pada laptop di dataset berada di rentang 2.3-2.8 GHz, dimana kecepatan CPU yang paling banyak digunakan ada di angka 2.5 GHz**
+- **Plot regresi menunjukan adanya korelasi positif antara kecepatan CPU dan harga laptop.** Namun, terdapat poin-poin yang dapat diamati terkait plot regresi ini. Plot regresi menunjukan bahwa semakin tinggi kecepatan CPU maka semakin mahal harga laptop tersebut. Akan tetapi lima laptop yang memiliki kecepatan CPU paling tinggi (3.6 GHz) justru memiliki harga yang relatif murah (kurang dari 1000 €). Bahkan terdapat cukup banyak laptop dengan kecepatan CPU dibawah 2 GHz yang memiliki harga yang lebih mahal dibandingkan kelima laptop tersebut.
+
+<br>
+
+### GPU Brand
+
+<p align="center">
+    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/Laptop-Price-Prediction/main/assets/b_gpu.png"> </kbd> <br>
+</p> 
+
+**Key Points:**
+- **Brand GPU yang paling banyak digunakan adalah Intel Graphics (55.49%)**
+- Brand GPU yang memiliki rataan dan kisaran harga laptop yang paling mahal adalah Nvidia Quadro
+- Selain Nvidia Quadro, brand Nvidia GeForce GTX dan AMD RX/Pro juga memiliki rataan harga yang lebih tinggi dibandingkan Intel Graphics
+- **Brand GPU yang memiliki rataan dan kisaran harga laptop yang paling murah adalah AMD Radeon**
+
+<br>
+
+### Memory
+
+<p align="center">
+    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/Laptop-Price-Prediction/main/assets/b_memory1.png"> </kbd> <br>
+</p> 
+
+**Key Points:**
+- **Memori utama yang paling banyak digunakan pada laptop adalah memori SSD (64.70%)**
+- **Memori SSD sebagai memori utama memiliki rataan harga yang lebih mahal dibandingkan tipe memori utama lainnya**. Bahkan, semua laptop yang harganya diatas 3000 € menggunakan memori SSD.
+- Sementara itu, tipe memori dengan rataan harga paling murah adalah memori Flash Storage.
+- Terkait memori tambahan, hanya 15.96% dari semua laptop yang memberikan memori tambahan.
+- Hampir semua memori tambahan yang diberikan adalah memori tipe HDD.
+
+<br>
+
+<p align="center">
+    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/Laptop-Price-Prediction/main/assets/b_memory1.png"> </kbd> <br>
+</p> 
+
+**Key Points:**
+1. SSD
+    - **Ukuran memori SSD yang paling banyak digunakan adalah SSD 256 GB**
+    - **Terdapat korelasi positif pada memori SSD, dimana semakin besar ukuran memori yang digunakan maka akan semakin mahal juga harga laptop tersebut**
+    - Terdapat potensi outlier, dimana laptop dengan memori SSD 8 GB memiliki harga yang relatif mahal diatas 2000 €
+2. HDD
+    - Range ukuran Memori HDD relatif jauh lebih besar dibandingkan tipe memori lainnya (500-2000 GB)
+    - Pada tipe memori ini, terlihat tidak ada pengaruh signifikan antara ukuran memori terhadap harga laptop
+3. Hybrid
+    - Memori tipe ini jarang digunakan sebagai memori utama laptop. Selain itu, terlihat juga tidak ada pengaruh antara ukuran tipe memori ini terhadap harga laptop
+4. Flash Storage
+    - Ukuran memori tipe Flash Storage relatif lebih kecil dibandingkan memori lainnya, dimana ukuran memori yang paling banyak digunakan adalah 32-64 GB
+    - Pada memori tipe ini, terdapat juga korelasi positif terhadap harga laptop, dimana semakin besar ukuran memori maka semakin mahal harga laptop
+
+<br>
+
+### Weight
+
+<p align="center">
+    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/Laptop-Price-Prediction/main/assets/b_weight.png"> </kbd> <br>
+</p> 
+
+**Key Points:**
+- Laptop-laptop pada dataset ini paling banyak memiliki berat pada rentang ~1.8-2.3 kg.
+- **Dari plot regresi dapat dilihat bahwa ada korelasi positif yang tidak terlalu signifikan antara berat laptop dengan harga laptop** 
+- Dapat dilihat juga bahwa untuk laptop-laptop yang beratnya diatas 3.5 kg mayoritas memiliki harga diatas 1000 €.
+
+<br>
+
+### Handling Outliers
+
+### 1. Laptop Price
+
+<p align="center">
+    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/Laptop-Price-Prediction/main/assets/c_price.png"> </kbd> <br>
+</p> 
+
+Dari empat laptop ini, setiap fitur laptop yang digunakan adalah fitur-fitur yang premium sehingga masih wajar harga empat laptop ini relatif lebih mahal dibandingkan laptop-laptop lain. RAM, brand CPU, brand GPU, tipe memori utama yang digunakan dari empat laptop ini memiliki rataan harga yang lebih mahal seperti yang diketahui dari analisa sebelumnya. Dikarenakan tidak adanya kontradiksi antara fitur yang digunakan terhadap harga keempat laptop ini, maka empat laptop ini tidak akan dibuang dari dataset.
+
+<br>
+
+### 2. RAM 32 GB
+
+<p align="center">
+    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/Laptop-Price-Prediction/main/assets/c_ram32.png"> </kbd> <br>
+</p> 
+
+Laptop ini memiliki fitur-fitur dengan harga premium. Selain RAM 32 GB, laptop Gaming ini juga menggunakan CPU Intel Core i7 HK, GPU Nvidia GeForce GTX, dan memori utama SSD 256 GB. Bahkan laptop ini juga memiliki memori tambahan berupa SSD 256 GB. Berdasarkan fitur-fitur yang digunakan, harga laptop ini dapat dikatakan terlalu murah. Maka dari itu, laptop ini dapat dianggap sebagai outlier dan akan dibuang dari dataset.
+
+<br>
+
+### 3. Resolution 2560x1440
+
+<p align="center">
+    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/Laptop-Price-Prediction/main/assets/c_reso.png"> </kbd> <br>
+</p> 
+
+Fitur yang digunakan oleh laptop ini adalah fitur dengan rataan harga yang relatif murah. Chuwi, brand yang mengeluarkan laptop ini memang memiliki rataan harga laptop yang murah pada dataset. Selain itu, fitur lain yang digunakan seperti CPU Intel Celeron dan GPU Intel Graphics merupakan fitur dengan harga yang murah juga. Ditambah lagi, tipe memori utama yang digunakan adalah Flash Storage dengan ukuran hanya 64 GB. Tidak mengherankan kalau harga laptop ini jauh lebih murah dibandingkan laptop dengan resolusi 2560x1440 lainnya. Maka dari itu, untuk sementara laptop ini tidak akan dibuang dari dataset.
+
+<br>
+
+### Features Correlations
+
+<p align="center">
+    <kbd> <img width="1000" alt="share" src="https://raw.githubusercontent.com/buddymar/Laptop-Price-Prediction/main/assets/d_corr.png"> </kbd> <br>
+</p> 
 
 <br>
 
