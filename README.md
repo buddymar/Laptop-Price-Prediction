@@ -1,7 +1,7 @@
 # 💻 Cracking the Code: Predicting Laptop Prices with Analysis and Machine Learning Model
 <br>
 
-**Platform**: Jupyter Notebook | [Notebook via nbviewer](https://nbviewer.org/github/buddymar/Laptop-Price-Prediction/blob/main/Laptop%20Price%20Prediction.ipynb) | [Notebook via Github](https://github.com/buddymar/Laptop-Price-Prediction/blob/main/Laptop%20Price%20Prediction.ipynb)<br>
+**Platform**: Jupyter Notebook | [View Notebook on nbviewer](https://nbviewer.org/github/buddymar/Laptop-Price-Prediction/blob/main/Laptop%20Price%20Prediction.ipynb) | [View Notebook on Github](https://github.com/buddymar/Laptop-Price-Prediction/blob/main/Laptop%20Price%20Prediction.ipynb)<br>
 **Programming Language**: Python <br>
 **Libraries**: Pandas, NumPy, Matplotlib, Seaborn, sklearn, SHAP <br>
 **Source Data**: Kaggle <br>
